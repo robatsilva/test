@@ -63,7 +63,7 @@ class ProductControllerTest {
 
         Mockito.when(productService.findAll()).thenReturn(Collections.singletonList(product));
 
-        mockMvc.perform(get("/products")
+        mockMvc.perform(get("/api/products")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123")))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Smartphone"))
@@ -86,7 +86,7 @@ class ProductControllerTest {
 
         Mockito.when(productService.save(Mockito.any(Product.class))).thenReturn(product);
 
-        mockMvc.perform(post("/products")
+        mockMvc.perform(post("/api/products")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(product)))

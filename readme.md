@@ -32,6 +32,10 @@ spring.jpa.show-sql=true
 
 # Server Port
 server.port=8080
+
+# Default user
+spring.security.user.name=admin
+spring.security.user.password=admin123
 ```
 
 Replace:
@@ -39,6 +43,20 @@ Replace:
 - `root` and `your_password` with your MySQL username and password.
 
 ---
+
+### **Authentication**
+The project uses Spring Security for basic HTTP authentication with default credentials configured in application.properties:
+
+|Username|	Password |
+|--------|-----------|
+|admin	 |admin123   |
+
+**Usage**
+When accessing protected endpoints or pages, you will be prompted to provide the username and password:
+
+In **web browsers**, a login pop-up will appear.
+For **API requests** (using tools like Postman or Insomnia), use the "Basic Auth" option.
+
 
 ### **Controllers**
 The project is structured to include two types of controllers:
@@ -109,12 +127,17 @@ The application will start on `http://localhost:8080`.
 | POST   | `/api/products`      | Create a new product     |
 | PUT    | `/api/products/{id}` | Update product by ID     |
 | DELETE | `/api/products/{id}` | Delete product by ID     |
+| GET    | `/api/categories`      | Get all categories         |
+| POST   | `/api/categories`      | Create a new category    |
+| PUT    | `/api/categories/{id}` | Update category by ID     |
+| DELETE | `/api/categories/{id}` | Delete category by ID     |
 
 #### **Web Interface (MVC)**
 | Endpoint           | Description                   |
 |--------------------|-------------------------------|
 | `/products/page`   | Product management interface |
 | `/products/edit/{id}` | Edit an existing product    |
+| `/products/new` | Create a new product    |
 
 ---
 

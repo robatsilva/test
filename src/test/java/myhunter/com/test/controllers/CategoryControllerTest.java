@@ -50,7 +50,7 @@ class CategoryControllerTest {
 
         Mockito.when(categoryService.save(Mockito.any(Category.class))).thenReturn(category);
 
-        mockMvc.perform(post("/categories")
+        mockMvc.perform(post("/api/categories")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(category)))
@@ -64,7 +64,7 @@ class CategoryControllerTest {
 
         Mockito.when(categoryService.findAll()).thenReturn(Collections.singletonList(category));
 
-        mockMvc.perform(get("/categories")
+        mockMvc.perform(get("/api/categories")
                 .with(SecurityMockMvcRequestPostProcessors.httpBasic("admin", "admin123"))) // Autenticação
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].name").value("Eletrônicos"));
