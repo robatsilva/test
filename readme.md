@@ -42,27 +42,30 @@ Replace:
 - `productdb` with your database name.
 - `root` and `your_password` with your MySQL username and password.
 
+> **Note**: You only need to create the database (`productdb`) in MySQL.  
+> Spring Boot will automatically create the required tables based on the `Product` and `Category` entity classes.
+
 ---
 
 ### **Authentication**
-The project uses Spring Security for basic HTTP authentication with default credentials configured in application.properties:
+The project uses Spring Security for basic HTTP authentication with default credentials configured in `application.properties`:
 
-|Username|	Password |
-|--------|-----------|
-|admin	 |admin123   |
+| Username | Password  |
+|----------|-----------|
+| `admin`  | `admin123`|
 
-**Usage**
+**Usage**  
 When accessing protected endpoints or pages, you will be prompted to provide the username and password:
+- In **web browsers**, a login pop-up will appear.
+- For **API requests** (using tools like Postman or Insomnia), use the "Basic Auth" option.
 
-In **web browsers**, a login pop-up will appear.
-For **API requests** (using tools like Postman or Insomnia), use the "Basic Auth" option.
-
+---
 
 ### **Controllers**
 The project is structured to include two types of controllers:
 
 1. **REST Controllers** (JSON API):
-   - Provides endpoints for JSON-based operations (CRUD for Products).
+   - Provides endpoints for JSON-based operations (CRUD for Products and Categories).
 
 2. **MVC Controllers**:
    - Handles the user interface for managing products using Thymeleaf templates.
@@ -77,8 +80,12 @@ The project is structured to include two types of controllers:
 
 2. **Database**:
    - The project uses MySQL for persistence.
+   - **Spring Boot** automatically creates the necessary tables in the database.
 
-3. **Unit Tests**:
+3. **Authentication**:
+   - Basic authentication is enabled with a default user: `admin` / `admin123`.
+
+4. **Unit Tests**:
    - Includes basic unit tests for key functionalities.
    - Proper testing would include full coverage of all edge cases and scenarios.
 
@@ -98,6 +105,8 @@ Create a database in MySQL:
 CREATE DATABASE productdb;
 ```
 
+> You do **not** need to create tables. Spring Boot will automatically generate them based on the entities.
+
 #### **3. Clone the Project**
 Clone the repository to your local machine:
 ```bash
@@ -106,7 +115,7 @@ cd <project-folder>
 ```
 
 #### **4. Update `application.properties`**
-Configure your MySQL credentials as shown in the [Configuration](#configuration-applicationproperties) section.
+Configure your MySQL credentials and authentication details as shown in the [Configuration](#configuration-applicationproperties) section.
 
 #### **5. Run the Application**
 Use Maven to build and run the project:
@@ -127,17 +136,17 @@ The application will start on `http://localhost:8080`.
 | POST   | `/api/products`      | Create a new product     |
 | PUT    | `/api/products/{id}` | Update product by ID     |
 | DELETE | `/api/products/{id}` | Delete product by ID     |
-| GET    | `/api/categories`      | Get all categories         |
-| POST   | `/api/categories`      | Create a new category    |
-| PUT    | `/api/categories/{id}` | Update category by ID     |
-| DELETE | `/api/categories/{id}` | Delete category by ID     |
+| GET    | `/api/categories`    | Get all categories       |
+| POST   | `/api/categories`    | Create a new category    |
+| PUT    | `/api/categories/{id}` | Update category by ID   |
+| DELETE | `/api/categories/{id}` | Delete category by ID   |
 
 #### **Web Interface (MVC)**
 | Endpoint           | Description                   |
 |--------------------|-------------------------------|
 | `/products/page`   | Product management interface |
 | `/products/edit/{id}` | Edit an existing product    |
-| `/products/new` | Create a new product    |
+| `/products/new`    | Create a new product          |
 
 ---
 
